@@ -1,0 +1,313 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/*全局页面字体设置*/
+body, 
+input,
+h1,
+h2 {
+    font-family: "微软雅黑","幼圆"; 
+    font-weight: 300;
+    font-size: 18px;
+}
+
+h3{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #195974;
+}
+
+h4{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 200;
+    color: #195974;
+}
+
+/*h1、h2两级标题相关属性设置*/
+h1,
+h2 {
+    margin: 10px 0;
+    line-height: 20px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+}
+
+h1,
+h2 {
+    line-height: 40px;
+}
+
+h2 {
+    font-size: 50px;
+    line-height: 1.2;
+}
+
+hr {
+    background: #EEE;
+    border: 0;
+    height: 1px;
+    margin: 40px 0 40px;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    float: left;
+    color:#fff;
+    font-weight:bold;
+    font-size:35px;
+    text-transform:uppercase;
+    padding-top: 10px;
+    margin-right:30px;
+}
+
+/*全局页面行高、颜色、背景色设置*/
+body {
+    line-height: 2;
+    color: #444;
+    background: #fff;
+}
+
+/*全局图片宽度高度设置*/
+img {
+    max-width: 100%;
+    height:auto;
+}
+
+/*头条新闻展示区宽度及溢出限制*/
+header {
+    width: 100%;
+    overflow: hidden;
+}
+
+header {
+    padding: 2em 0 2em 0; 
+    text-align: center; 
+    background: #2175D0; 
+    color: #fff;
+}
+
+/*头条展示区二级标题位置设置*/
+header h2 {
+    margin: 0 0 1em 0;
+}
+
+/*头条展示区文字标题设置*/
+header h2.docs-header {
+    margin: 0;
+}
+
+/*头条展示区链接样式设置*/
+header a{
+    color: #fff;
+}
+header a:hover {
+    text-decoration: underline;
+}
+
+header a:active {
+    color: #fff;
+}
+
+/*container class宽度、外边距、位置的设置*/
+.container {
+    width: 95%;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/*底部全局样式设定*/
+footer {
+    text-align: center;
+    padding: 1.5em 0;
+}
+
+footer p {
+    margin: 0;
+    color: #999;
+}
+
+/*底部版权说明、关于网站文字，行高，字体的设置*/
+.copyrights{
+	text-indent:-9999px;
+	height:0;
+	line-height:0;
+	font-size:0;
+	overflow:hidden;
+}
+
+/*以下是默认的链接文字显示和表示的定义*/
+a {
+    text-decoration: none;
+    color: #2175D0;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: #47b5e2;
+}
+
+
+/* 导航栏样式设定 */
+nav {
+    background: #135571;
+    padding: 10px 0;
+    min-height: 60px;
+}
+
+/*导航栏中表格样式设定*/
+nav ul, nav li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: white;
+    height: 46px;
+}
+
+/*导航栏链接局部设定*/
+nav a {
+    padding: 0 1em;
+    color: #EEE;
+    font-size: .9em;
+    height: 60px;
+    line-height: 60px;
+    display: block;
+}
+
+nav h1 a {
+    padding: 7px 1em;
+    height: 46px;
+    line-height: 0;
+    height: 45px;
+    line-height: 45px;
+}
+
+nav a:hover {
+    background: #195974;
+    text-decoration: none;
+}
+
+nav a:active {
+    background: #27637e;
+}
+
+
+nav a:active {
+    color: #fff;
+    cursor: default;
+}
+
+
+
+nav ul.toplinks {
+    padding: 20px 0 0 0;
+}
+
+nav #menu {
+    overflow: hidden;
+    max-height: 0;
+    clear: left;
+}
+
+
+nav #menu-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.5em;
+    padding: 0 16px;
+}
+
+/*登录按钮设置*/
+.login-button{
+    display:inline-block;
+    width:248px;
+    line-height:40px;
+    background:#2175d0;
+    color:#fff;
+    border-radius:5px;
+    font-size:20px;
+    text-align:center;
+    }
+.login-button:hover{
+    color:#fff;
+    background:#449eff;
+    }
+.login-button:active{
+    background:#0058b8;
+    }
+
+@media only screen and (min-width: 680px) {
+    nav, nav #menu {
+        height: 60px !important;
+    }
+
+    nav li, nav a {
+        float: left;
+    }
+
+
+    nav ul.toplinks {
+        float: left;
+        padding: 0;
+        clear: none;
+    }
+
+    nav ul.toplinks li {
+        margin: 0 0 0 10px;
+    }
+
+    nav #menu-toggle {
+        display: none !important;
+    }
+
+    nav #menu {
+        max-height: 9999px;
+        clear: none;
+    }
+}
+
+
+/*页面内容设定*/
+section { padding: 1em 0 3em; text-align: center; }
+section.vibrant { background: #222; color: #fff; }
+
+nav:before, 
+nav:after, 
+header:before, 
+header:after, 
+section:before, 
+section:after {
+    content: " ";
+    display: table;
+}
+
+nav:after, header:after, section:after  { clear: both; }
+nav, header, section { *zoom: 1; }
+
+header {
+    padding: 4em 0 4em 0; 
+}
+
+.container {
+    max-width: 1000px;
+    padding: 0 20px;
+}
+
+section { padding: 3em 0; text-align: left; }
+section.centered {
+    text-align: center;
+}
+
+input {
+    display: inline-block;
+}
+

@@ -1,0 +1,74 @@
+body{
+	background: #F0F0F0;
+}
+img[class=logo]{
+	width:130px;
+	height:70px;
+}
+div[id=loginReg]{
+	text-align: right;
+}
+div[class=content]{
+	display:inline-block;
+	box-sizing:border-box;
+	padding: 20px 25px;
+}
+#umenu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 20px;
+}
+#searchbox {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    line-height: 20px;
+}
+#umenu a {
+    margin: 0 6px;
+}
+.loginTitle{
+	color: #2175d0;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 24px auto 10px;
+    text-align: center;
+}
+.userLogin {
+    width: 990px;
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    margin: auto;
+    padding-bottom: 25px;
+}
+.userLogin .login-box {
+    width: 790px;
+    margin: auto;
+    border-top: 1px solid #e1e1e1;
+    margin-top: 26px;
+    position: relative;
+}
+.userLogin .login-box input{
+    width: 228px;
+    height: 38px;
+    margin: 0 auto;
+    padding: 0px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    color: #666;
+    display: block;
+}
+input[id=loginbtn]{
+    background: #f0f0f0;
+}
+#footer {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 30px;
+    color: #666;
+}

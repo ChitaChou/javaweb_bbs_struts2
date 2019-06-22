@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+    <constant name="struts.custom.i18n.resources" value="globalMessages" />
+	
+	<!-- 管理员相关业务action -->
+	<package name="admin" namespace="/" extends="struts-default">
+	
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<!-- 国际化拦截器 -->
+	    	<interceptor name="i18nIntercept" class="com.discovery.interceptor.i18nIntercepter"></interceptor>
+	    	<!-- 用于管理员身份验证的拦截器 -->
+	    	<interceptor name="AdminLoginIntercept" class="com.discovery.interceptor.AdminLoginInterceptor"></interceptor>
+	    </interceptors>
+	    
+	    <!-- 用于访问管理员登录界面的action -->
+        <action name="adminLogin" class="com.discovery.action.PageAction" method="toLoginPage">
+            <result name="success">/admin_login.jsp</result>
+            <!-- 配置登录界面国际化元素 -->
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="i18nIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于验证管理员身份的action -->
+        <action name="checkAdmin" class="com.discovery.action.CheckAdminLoginAction">
+            <result name="success" type="chain">adminIndex</result>
+            <result name="fail">/admin_login.jsp</result>
+        </action>
+        
+        <!-- 用于访问管理员后台首页的action -->
+        <action name="adminIndex" class="com.discovery.action.PageAction" method="toAdminMainpage">
+            <result name="success">/admin_index.jsp</result>
+            <result name="error" type="chain">adminLogin</result>
+            <!-- 配置管理员身份验证的拦截器 -->
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="AdminLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 管理员退出登录 -->
+        <action name="adminLogout" class="com.discovery.action.CheckAdminLoginAction" method="logout">
+        	<result name="logout_success" type="chain">adminLogin</result>
+        </action>
+        
+        <!-- 用于访问查看所有用户页面的action -->
+        <action name="allUsersIndex" class="com.discovery.action.AdminDataAction" method="toAllUserPage">
+            <result name="success">/admin_all_users.jsp</result>
+            <result name="error" type="chain">adminLogin</result>
+            <!-- 配置管理员身份验证的拦截器 -->
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="AdminLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于访问查看所有主题帖页面的action -->
+        <action name="allThreadsIndex" class="com.discovery.action.AdminDataAction" method="toAllThreadPage">
+            <result name="success">/admin_all_thread.jsp</result>
+            <result name="error" type="chain">adminLogin</result>
+            <!-- 配置管理员身份验证的拦截器 -->
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="AdminLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于访问查看所有回复页面的action -->
+        <action name="allReplyIndex" class="com.discovery.action.AdminDataAction" method="toAllReplyPage">
+            <result name="success">/admin_all_reply.jsp</result>
+            <result name="error" type="chain">adminLogin</result>
+            <!-- 配置管理员身份验证的拦截器 -->
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="AdminLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于删除某条用户信息的action -->
+        <action name="del" class="com.discovery.action.AdminDataAction">
+            <result name="del_user_success">/admin_all_users.jsp</result>
+            <result name="del_user_fail">/admin_all_users.jsp</result>
+            <result name="del_thread_success">/admin_all_thread.jsp</result>
+            <result name="del_thread_fail">/admin_all_thread.jsp</result>
+            <result name="del_reply_success">/admin_all_reply.jsp</result>
+            <result name="del_reply_fail">/admin_all_reply.jsp</result>
+            <!-- 配置管理员身份验证的拦截器 -->
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="AdminLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于编辑管理员信息的action -->
+        <action name="edit" class="com.discovery.action.AdminDataAction">
+            <result name="toEdit">/admin_profile_edit.jsp</result>
+            <result name="edit_success">/admin_index.jsp</result>
+            <!-- 配置管理员身份验证的拦截器 -->
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="AdminLoginIntercept"></interceptor-ref>
+        </action>
+        
+    </package>    
+    
+    <!-- 用户相关业务action -->
+    <package name="user" namespace="/" extends="struts-default">
+    
+    	<!-- 配置拦截器 -->
+		<interceptors>
+	    	<!-- 用于用户身份权限验证的拦截器 -->
+	    	<interceptor name="UserLoginIntercept" class="com.discovery.interceptor.UserLoginInterceptor"></interceptor>
+	    </interceptors>
+	    
+    	<!-- 测试首页进入action -->
+    	<action name="testIndex" class="com.discovery.action.UserDataAction" method="toIndexPage">
+            <result name="success">/testIndex.jsp</result>
+        </action>
+        
+        <!-- 注册页面进入action -->
+        <action name="toRegister" class="com.discovery.action.UserDataAction" method="toRegisterPage">
+            <result name="success">/register.jsp</result>
+        </action>
+        
+        <!-- 注册新用户action (由注册form提交) -->
+        <action name="create" class="com.discovery.action.UserDataAction">
+            <result name="create_success">/register_success.jsp</result>
+            <result name="input">/register.jsp</result>
+        </action>
+        
+        <!-- 用于访问用户登录界面的action -->
+        <action name="userLogin" class="com.discovery.action.PageAction" method="toUserLoginPage">
+            <result name="success">/user_login.jsp</result>
+        </action>
+        
+        <!-- 用于验证用户身份的action (登录form提交)-->
+        <action name="checkUser" class="com.discovery.action.CheckUserLoginAction">
+            <result name="success" type="chain">testIndex</result>
+            <result name="fail">/user_login.jsp</result>
+        </action>
+        
+        <!-- 用户退出登录 -->
+        <action name="userLogout" class="com.discovery.action.CheckUserLoginAction" method="logout">
+        	<result name="logout_success" type="chain">testIndex</result>
+        </action>
+        
+        <!-- 搜索相关业务action -->
+        <action name="search" class="com.discovery.action.UserDataAction">
+            <result name="user_search_success">/user_search_result.jsp</result>
+            <result name="user_search_fail">error.jsp</result>
+        </action>
+        
+        <!-- 前往子论坛首页action -->
+        <action name="forum" class="com.discovery.action.UserDataAction">
+            <result name="forum_success">/forum.jsp</result>
+            <result name="forum_fail">error.jsp</result>
+        </action>
+        
+        <!-- 前往帖子详情页action -->
+        <action name="thread" class="com.discovery.action.UserDataAction">
+            <result name="thread_success">/thread.jsp</result>
+            <result name="thread_fail">error.jsp</result>
+        </action>
+        
+        <!-- 用于访问发表帖子页面的action -->
+        <action name="newThread" class="com.discovery.action.UserDataAction" method="toNewThreadPage">
+            <result name="success">/new_thread.jsp</result>
+            <result name="error">error_notlogin.jsp</result>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="UserLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于提交帖子页面的action -->
+        <action name="publishNewThread" class="com.discovery.action.UserDataAction" method="publishNewThread">
+            <result name="publish_success">publish_newThread_success.jsp</result>
+            <result name="publish_error">/new_thread.jsp</result>
+        </action>
+        
+        <!-- 用于访问发表回复页面的action -->
+        <action name="newReply" class="com.discovery.action.UserDataAction" method="toNewReplyPage">
+            <result name="success">/new_reply.jsp</result>
+            <result name="error">error_notlogin.jsp</result>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="UserLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于提交回复页面的action -->
+        <action name="publishNewReply" class="com.discovery.action.UserDataAction" method="publishNewReply">
+            <result name="reply_success">/reply_success.jsp</result>
+            <result name="reply_error">/new_reply.jsp</result>
+        </action>
+        
+        <!-- 用于访问发表回复(跟楼)页面的action -->
+        <action name="newReply2" class="com.discovery.action.UserDataAction" method="toNewReplyPage2">
+            <result name="success">/new_reply2.jsp</result>
+            <result name="error">error_notlogin.jsp</result>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="UserLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于访问用户个人信息的action -->
+        <action name="pc" class="com.discovery.action.UserDataAction">
+            <result name="toPC">/user_personal_center.jsp</result>
+            <result name="pc_edit_success" type="chain">testIndex</result>
+            <result name="toUAP">/update_user_avatar.jsp</result>
+            <result name="avatar_edit_success" type="chain">testIndex</result>
+            <result name="avatar_edit_fail">error.jsp</result>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="UserLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于访问用户所有帖子的action -->
+        <action name="allThread" class="com.discovery.action.UserDataAction">
+            <result name="toAllThraed">/user_thread_all.jsp</result>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="UserLoginIntercept"></interceptor-ref>
+        </action>
+        
+        <!-- 用于访问用户所有回复的action -->
+        <action name="allReply" class="com.discovery.action.UserDataAction">
+            <result name="toAllReply">/user_reply_all.jsp</result>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+	    	<interceptor-ref name="UserLoginIntercept"></interceptor-ref>
+        </action>
+    </package>
+</struts>    
